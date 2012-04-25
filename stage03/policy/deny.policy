@@ -1,0 +1,14 @@
+{
+  "Version":"2011-04-01",
+  "Statement":[{
+    "Sid":"1",
+    "Effect":"Allow",
+    "Action":"*",
+    "Resource":"*",
+  }, {
+    "Sid":"2",
+    "Effect":"Deny",
+    "Action":"iam:createuser",
+    "Resource":"*",
+  }]
+}

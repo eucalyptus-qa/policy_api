@@ -1,0 +1,13 @@
+{
+   "Statement":[{
+      "Effect":"Allow",
+      "Action":["s3:*"],
+      "Resource":["*"] 
+      },
+      {
+      "Effect":"Deny",
+      "Action":["ec2:*"],
+      "Resource":["*"]
+      }
+   ]
+}

@@ -1,0 +1,17 @@
+{
+  "Statement": [
+    {
+      "Sid": "Stmt1313453084396",
+      "Action": [
+        "ec2:RunInstances"
+      ],
+      "Effect": "Allow",
+      "Resource": "*",
+      "Condition": {
+        "DateLessThanEquals": {
+          "aws:CurrentTime": 2011-08-16
+        }
+      }
+    }
+  ]
+}

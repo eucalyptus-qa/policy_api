@@ -1,0 +1,14 @@
+{
+  "Version":"2011-04-01",
+  "Statement":[{
+    "Sid":"3",
+    "Effect":"Limit",
+    "Action":"iam:createuser",
+    "Resource":"*",
+    "Condition":{
+      "NumericLessThanEquals":{
+        "iam:quota-usernumber":"1"
+      }
+    }
+  }]
+}

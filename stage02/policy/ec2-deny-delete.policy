@@ -1,0 +1,11 @@
+{
+  "Statement": [
+    {
+      "Action": [
+        "ec2:Delete*"
+      ],
+      "Effect": "Deny",
+      "Resource": "*"
+    }
+  ]
+}

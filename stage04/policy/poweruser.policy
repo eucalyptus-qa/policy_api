@@ -1,0 +1,14 @@
+{
+"Statement":[{
+"Effect":"Allow",
+"Action":"*",
+"Resource":"*"
+},
+{
+"Effect":"Deny",
+"Action":"iam:*",
+"Resource":"*"
+}
+]
+}
+

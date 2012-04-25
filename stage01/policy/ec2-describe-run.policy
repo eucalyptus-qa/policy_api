@@ -1,0 +1,9 @@
+{
+   "Statement":[{
+      "Effect":"Allow",
+      "Action":["ec2:*Describe*","ec2:*Run*"],
+      "Resource":"*",
+      }
+   ]
+}
+

@@ -1,0 +1,17 @@
+{
+  "Statement": [
+    {
+      "Sid": "Stmt1313452026420",
+      "Action": [
+        "iam:ListUserPolicies"
+      ],
+      "Effect": "Allow",
+      "Resource": "*",
+      "Condition": {
+        "IpAddress": {
+          "aws:SourceIp": "192.168.51.0/24"
+        }
+      }
+    }
+  ]
+}

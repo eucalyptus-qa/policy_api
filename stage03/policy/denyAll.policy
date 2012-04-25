@@ -1,0 +1,8 @@
+{
+  "Version":"2011-04-01",
+  "Statement":[{
+    "Effect":"Deny",
+    "Action":"ec2:*",
+    "Resource":"*",
+  }]
+}

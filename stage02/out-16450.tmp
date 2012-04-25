@@ -1,0 +1,151 @@
+
+IP 192.168.51.4 [CLC Distro: CENTOS CLC Version: 5.6 CLC ARCH 64] is built from REPO as Eucalyptus-CC00 CLC SC00 WS
+IP 192.168.51.8 [NC Distro: CENTOS NC Version: 5.6 NC ARCH 64] is built from REPO as Eucalyptus-NC00
+Creating an SSH connection to root:foobar@192.168.51.4
+[root@192.168.51.4 - 10-31 18:37:40] rm -rf eucarc-eucalyptus-admin
+
+[root@192.168.51.4 - 10-31 18:37:41] mkdir eucarc-eucalyptus-admin
+
+[root@192.168.51.4 - 10-31 18:37:42] ls
+admin_cred.zip
+ anaconda-ks.cfg
+ cloud-cert.pem
+ euca2-admin-7b456f67-cert.pem
+ euca2-admin-7b456f67-pk.pem
+ euca_builder
+ euca_builder.tar.gz
+ eucarc
+ eucarc-engr1-admin
+ eucarc-engr1-test1
+ eucarc-engr2-admin
+ eucarc-engr2-test2
+ eucarc-engr-test1
+ eucarc-engr-test2
+ eucarc-eucalyptus-admin
+ iamrc
+ id_rsa.pub.cc
+ id_rsa.pub.clc
+ install.log.syslog
+ jssecacerts
+ policy
+ post_ops.centos
+ prep-rpm-qaimage.pl
+ seeds
+ testfile_10MB
+ testfile_10MB0
+ testfile_10MB1
+ testfile_10MB2
+ testfile_10MB3
+ testfile_10MB4
+ testfile_1MB
+
+[root@192.168.51.4 - 10-31 18:37:43] //usr/sbin/euca_conf --get-credentials eucarc-eucalyptus-admin/euca.zip --cred-account eucalyptus --cred-user admin
+
+[root@192.168.51.4 - 10-31 18:37:45] ls eucarc-eucalyptus-admin
+euca.zip
+
+[root@192.168.51.4 - 10-31 18:37:47] cd eucarc-eucalyptus-admin; unzip -o euca.zip
+Archive:  euca.zip
+ To setup the environment run: source /path/to/eucarc
+   inflating: eucarc                  
+   inflating: iamrc                   
+   inflating: cloud-cert.pem          
+   inflating: jssecacerts             
+   inflating: euca2-admin-97f43949-pk.pem  
+   inflating: euca2-admin-97f43949-cert.pem  
+
+[root@192.168.51.4 - 10-31 18:37:48] cat eucarc-eucalyptus-admin/eucarc  | grep -v EUCA_KEY_DIR= > eucarc-eucalyptus-admin/eucarc.tmp
+
+[root@192.168.51.4 - 10-31 18:37:49] echo EUCA_KEY_DIR=eucarc-eucalyptus-admin > eucarc-eucalyptus-admin/eucarc.dir; cat eucarc-eucalyptus-admin/eucarc.tmp >> eucarc-eucalyptus-admin/eucarc.dir; mv eucarc-eucalyptus-admin/eucarc.dir eucarc-eucalyptus-admin/eucarc
+
+[root@192.168.51.4 - 10-31 18:37:50] echo 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA4dW1AXL6L7fA3HiRH8YfSfRLEFZSYfJLFdKI9zUtTPWvCiRPY2NsLOcRbVTYkMq10CRN2ALkAviEildGIO2tEyygynYVl5zq3ACi+yv9L1aDTc+4KUV1ob6DbGu6ZV02t3Pf0d/sJ8uuYsHt4gcHpm7mVlZIgSLXCBqtJyLmfxzc9ZnJHAmZITTX4cE8XzmdLO+i0Iu8JKTeNgtV1Fr4fPA5gtI4SzAmtvwQaErTJ0T7WoKj8OOu4cYjvbo7O1Qnjk63XPO9aJHfBq2AeQX6FrGXBGTxvKGpq7h6lL/XAJyn8/8YnW3hlGBfb1hkWBfZC2NYo3fQ1zCYcQBWnfgghw== mailman@QA-SERVER-6755
+' >> ~/.ssh/authorized_keys
+
+
+IP 192.168.51.4 [CLC Distro: CENTOS CLC Version: 5.6 CLC ARCH 64] is built from REPO as Eucalyptus-CC00 CLC SC00 WS
+IP 192.168.51.8 [NC Distro: CENTOS NC Version: 5.6 NC ARCH 64] is built from REPO as Eucalyptus-NC00
+Creating a LOCAL connection
+[LOCAL - 10-31 18:37:51] scp -o StrictHostKeyChecking=no -r policy root@192.168.51.4:
+
+[LOCAL - 10-31 18:37:52] scp -o StrictHostKeyChecking=no  ../share/testfile* root@192.168.51.4:
+
+[root@192.168.51.4 - 10-31 18:37:53] euare-accountcreate -a engr
+engr 	860804417849
+
+[root@192.168.51.4 - 10-31 18:37:55] euare-accountlist
+engr 	860804417849
+ eucalyptus 	095034770377
+
+[root@192.168.51.4 - 10-31 18:37:57] euare-usercreate -u test1 -p / --delegate engr
+
+[root@192.168.51.4 - 10-31 18:37:59] euare-userlistbypath --delegate engr
+arn:aws:iam::engr:user/admin
+ arn:aws:iam::engr:user/test1
+
+^^^^^^[TEST_REPORT] PASSED - Created new user arn:aws:iam::engr:user/test1 ^^^^^^
+
+[root@192.168.51.4 - 10-31 18:38:01] euare-usercreate -u test2 -p / --delegate engr
+
+[root@192.168.51.4 - 10-31 18:38:03] euare-userlistbypath --delegate engr
+arn:aws:iam::engr:user/admin
+ arn:aws:iam::engr:user/test1
+ arn:aws:iam::engr:user/test2
+
+^^^^^^[TEST_REPORT] PASSED - Created new user arn:aws:iam::engr:user/test2 ^^^^^^
+
+[root@192.168.51.4 - 10-31 18:38:05] euare-groupcreate -g policy-group -p / --delegate engr
+
+[root@192.168.51.4 - 10-31 18:38:06] euare-grouplistbypath --delegate engr
+groups
+ 	arn:aws:iam::engr:group/policy-group
+
+******[TEST_REPORT] ACTION - Add a group policy ******
+[root@192.168.51.4 - 10-31 18:38:08] euare-groupuploadpolicy -g policy-group -p allowall -f ./policy/allowall.policy --delegate engr
+
+******[TEST_REPORT] ACTION - Check policy is active ******
+[root@192.168.51.4 - 10-31 18:38:10] euare-grouplistpolicies -g policy-group --delegate engr
+allowall
+
+[root@192.168.51.4 - 10-31 18:38:12] euare-groupgetpolicy -g policy-group -p allowall --delegate engr
+{
+   "Version":"2011-04-01",
+   "Statement":[{
+     "Sid":"1",
+     "Effect":"Allow",
+     "Action":"*",
+     "Resource":"*",
+   }]
+ }
+
+[root@192.168.51.4 - 10-31 18:38:14] euare-groupadduser -g policy-group -u test1 --delegate engr
+
+[root@192.168.51.4 - 10-31 18:38:16] euare-groupadduser -g policy-group -u test2 --delegate engr
+
+^^^^^^[TEST_REPORT] FAILED Timeout occured after 120 seconds
+^^^^^^
+[root@192.168.51.4 - 10-31 18:40:17] rm -rf eucarc-engr-test1
+
+^^^^^^[TEST_REPORT] FAILED Timeout occured after 120 seconds
+^^^^^^
+[root@192.168.51.4 - 10-31 18:42:18] mkdir eucarc-engr-test1
+Write failed: Broken pipe
+Can't locate object method "o" via package "EucaTest" at ./ec2-quota-test.pl line 270.
+
+[root@192.168.51.4 - 10-31 18:42:38] ls
+
+^^^^^^[TEST_REPORT] FAILED Unable to make directory: eucarc-engr-test1^^^^^^
+[root@192.168.51.4 - 10-31 18:42:39] rm -rf eucarc-engr-test2
+
+[root@192.168.51.4 - 10-31 18:42:40] mkdir eucarc-engr-test2
+
+[root@192.168.51.4 - 10-31 18:42:41] ls
+
+^^^^^^[TEST_REPORT] FAILED Unable to make directory: eucarc-engr-test2^^^^^^
+******[TEST_REPORT] ACTION - Policy under test is volume-total-size-25 ******
+******[TEST_REPORT] ACTION - Add a user policy ******
+[root@192.168.51.4 - 10-31 18:42:42] euare-useruploadpolicy -u test1 -p volume-total-size-25 -f policy/volume-total-size-25.policy --delegate engr
+
+******[TEST_REPORT] ACTION - Check policy is active ******
+[root@192.168.51.4 - 10-31 18:42:43] euare-userlistpolicies -u test1 --delegate engr
+
+^^^^^^[TEST_REPORT] FAILED failed to upload policy to user^^^^^^
