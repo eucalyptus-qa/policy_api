@@ -59,7 +59,7 @@ my $partition = $partition_response[0];
 chomp($partition);
 my $volume = $remote->create_volume($partition, {size=>1});
 my $snapshot = $remote->create_snapshot($volume);
-sleep(20);
+sleep(40);
 test_resource_policy("snapshot",$snapshot);
 test_resource_policy("volume",$volume);
 test_resource_policy("vmtype", "m1.large");
@@ -168,12 +168,13 @@ POLICY
             $remote->fail("Did not allow $policy_user2 to use $resource_in_test $id");
        }
        $remote->sys("for img in `euca-describe-instances | awk '{print \$2}'`; do euca-terminate-instances \$img; done");     
+       sleep 60;
     }
     if($resource_in_test =~ /securitygroup/){
         $remote->set_credpath($user1_cred);
         $remote->test_name("Terminating all existing instances");
         $remote->sys("for img in `euca-describe-instances | awk '{print \$2}'`; do euca-terminate-instances \$img; done");
-        sleep 20;    
+        sleep 60;    
         my $emi = $remote->get_emi();
         my @instance_response = $remote->sys("euca-run-instances $emi -g $id");
         if( $instance_response[1] =~ /INSTANCE.*$id/){
