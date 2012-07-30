@@ -4,7 +4,7 @@
      "Action": ["*" ],
      "Effect": "Limit",
      "Resource": "*",
-     "Condition": { "NumericLessThanEquals":{"s3:quota-bucketsize": "25"}}
+     "Condition": { "numlteq":{"s3:quota-bucketsize": "25"}}
    }
  ]
 }
